@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "Gamers Lobby",
+    "slug": "frontend",
+    "version": "1.0.0",
+    "orientation": "portrait",
+
+    "icon": "./assets/images/icon1.png",
+
+    "scheme": "frontend",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.x2300090189.frontend"
+    },
+
+    "android": {
+      "package": "com.x2300090189.frontend",
+
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png",
+        "backgroundColor": "#E6F4FE"
+      },
+
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+
+       
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-8525673711213815~1384479527"
+      }
+    },
+
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+
+    "plugins": [
+      "expo-router",
+
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ]
+    ],
+
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+
+    "extra": {
+      "router": {},
+
+      "eas": {
+        "projectId": "aec385a6-8f71-4fe9-9dd9-e09cc3930dda"
+      },
+
+       
+      "ads": {
+        "banner": "ca-app-pub-8525673711213815/4022251150",
+        "reward": "ca-app-pub-8525673711213815/6333553878"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+
+# expo
+.expo
+dist
+build
+
+# logs
+*.log
+
+# system files
+.DS_Store
+
+# 🔴 CRITICAL FIX
+/Users/*
+~/.Trash
+.Trash
+Library
+/tmp
