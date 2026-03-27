@@ -6,27 +6,32 @@ import { Stack, useRouter } from "expo-router";
 import Constants from "expo-constants";
 
 //
-// 🔥 ONLY LOAD ADS IN DEV BUILD / PRODUCTION
+// 🔥 DETECT ENVIRONMENT
 //
-type AdsModule = typeof import("react-native-google-mobile-ads");
-
-let BannerAd: AdsModule["BannerAd"] | null = null;
-let BannerAdSize: AdsModule["BannerAdSize"] | null = null;
-let TestIds: AdsModule["TestIds"] | null = null;
-
 const isExpoGo = Constants.appOwnership === "expo";
 
+//
+// 🔥 SAFE ADS IMPORT (NO TYPES IN JSX)
+//
+let BannerAd = null;
+let BannerAdSize = null;
+let TestIds = null;
+
 if (!isExpoGo) {
-  const ads = require("react-native-google-mobile-ads");
-  BannerAd = ads.BannerAd;
-  BannerAdSize = ads.BannerAdSize;
-  TestIds = ads.TestIds;
+  try {
+    const ads = require("react-native-google-mobile-ads");
+    BannerAd = ads.BannerAd;
+    BannerAdSize = ads.BannerAdSize;
+    TestIds = ads.TestIds;
+  } catch (e) {
+    console.log("Ads module failed to load:", e);
+  }
 } else {
   console.log("🚫 Ads disabled in Expo Go");
 }
 
 //
-// 🎯 AD UNIT
+// 🎯 AD UNIT ID
 //
 const adUnitId =
   __DEV__ && TestIds
@@ -36,6 +41,9 @@ const adUnitId =
 export default function RootLayout() {
   const router = useRouter();
 
+  //
+  // 🔙 ANDROID BACK HANDLER
+  //
   useEffect(() => {
     const backAction = () => {
       if (router.canGoBack()) {
@@ -61,7 +69,7 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }} />
       </View>
 
-      {/* 📢 BANNER (ONLY OUTSIDE EXPO GO) */}
+      {/* 📢 BANNER */}
       {!isExpoGo && BannerAd && BannerAdSize && (
         <View style={styles.banner}>
           <BannerAd
@@ -88,7 +96,7 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 1,
-    paddingBottom: 60,
+    paddingBottom: 60, // space for banner
   },
 
   banner: {
